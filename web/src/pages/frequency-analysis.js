@@ -107,12 +107,28 @@ class Histogram extends Component {
     }
 }
 
+class ToggleButton extends Component {
+    render() {
+        const e = this.props.e;
+        const ctl = this.props.controller;
+        const h = ctl.state.highlight;
+        const isOn = h[e.key];
+        var buttonStyle = {
+            backgroundColor: (isOn === true? "gold": "#DDD")
+        };
+        return (
+            <button onClick={ctl.highlightKeyword.bind(ctl, e.key, isOn===true? "off": "on")} style={buttonStyle} ><span style={{fontFamily: "monospace"}}>{e.key}</span> ({e.value})</button>
+        )
+    }
+};
+
 class CaesarCipher extends Component {
 
     constructor() {
         super();
         this.state = {
             mapping: {},
+            highlight: {},
             paragraph: `
         Meltdown and Spectre exploit critical vulnerabilities in modern processors. These hardware vulnerabilities allow programs to steal data which is currently processed on the computer. While programs are typically not permitted to read data from other programs, a malicious program can exploit Meltdown and Spectre to get hold of secrets stored in the memory of other running programs. This might include your passwords stored in a password manager or browser, your personal photos, emails, instant messages and even business-critical documents.
         Meltdown and Spectre work on personal computers, mobile devices, and in the cloud. Depending on the cloud provider's infrastructure, it might be possible to steal data from other customers.
@@ -122,46 +138,118 @@ class CaesarCipher extends Component {
     componentDidMount() {
         
     }
+    highlightKeyword(keyword, mode) {
+        var p = JSON.parse(JSON.stringify(this.state.highlight));
+        if (mode === "on") {
+            p[keyword] = true;
+        } else {
+            p[keyword] = undefined;
+        }
+        this.setState((o) => {
+            return {
+                mapping: o.mapping,
+                highlight: p,
+                paragraph: o.paragraph
+            }
+        })
+    }
     substituteChange(inputboxID, ch) {
         var c = document.getElementById(inputboxID).value;
         var m = JSON.parse(JSON.stringify(this.state.mapping));
         if (c.length !== 1) c = undefined;
         m[ch] = c;
-        this.setState((o) => { return { mapping: m, paragraph: o.paragraph }})
+        this.setState((o) => { return {
+            mapping: m,
+            highlight: o.highlight, 
+            paragraph: o.paragraph }})
         console.log(inputboxID, ch);
     }
     updateText() {
         var t = document.getElementById('par').value;
-        this.setState((o) => { return { mapping: o.mapping, paragraph: t }; });
+        this.setState((o) => { return {
+            mapping: o.mapping,
+            highlight: o.highlight,
+            paragraph: t }; });
     }
     render() {
         const mapping = this.state.mapping;
         var counts = {};
         var s = this.state.paragraph.toUpperCase();
+        s = s.replace(/[^A-Z]/g, '');
         for (var i = 0; i < s.length; i++) {
             var ch = s[i];
             if (counts[ch] === undefined) counts[ch] = 1;
             else counts[ch] += 1;
         }
+        var bigram = {}, bigramlist = [];
+        var trigram = {}, trigramlist = [];
+        for (var i = 0; i+1 < s.length; i++) {
+            var st = s[i] + s[i+1];
+            if (bigram[st] === undefined) bigram[st] = 1;
+            else bigram[st] += 1;
+        }
+        for (var i = 0; i+2 < s.length; i++) {
+            var st = s[i] + s[i+1] + s[i+2];
+            if (trigram[st] === undefined) trigram[st] = 1;
+            else trigram[st] += 1;
+        }
+        for (var key in trigram) {
+            if (trigram[key] > 1)
+                trigramlist.push({ key: key, value: trigram[key] });
+        }
+        for (var key in bigram) {
+            if (bigram[key] > 1) 
+                bigramlist.push({ key: key, value: bigram[key] });
+        }
+        bigramlist.sort((a, b) => (b.value - a.value));
+        trigramlist.sort((a, b) => (b.value - a.value));
+        console.log(bigramlist);
+        console.log(trigramlist);
 
         var decodedText = [];
-        for (var i = 0; i < s.length; i++) {
-            var ch = s[i];
-            if (mapping[ch] !== undefined) {
-                decodedText.push((<span key={i} style={{color: "red"}}>{mapping[ch]}</span>));
-            } else {
-                decodedText.push((<span key={i} style={{color: "black"}}>{ch}</span>));
+        var markedText = {};
+        for (var kw in this.state.highlight) {
+            if (this.state.highlight[kw] === true)
+            for (var i = 0; i <= s.length - kw.length; i++) {
+                var ok = true;
+                for (var j = 0; j < kw.length; j++) if(s[i+j] !== kw[j]) ok=false;
+                if (ok == true) for(var j=0;j<kw.length; j++) markedText[ (i+j) ] = 1;
             }
         }
+        for (var i = 0; i < s.length; i++) {
+            var ch = s[i];
+            
+            var chStyle = { color: "black" };
+            var chDisplay = ch;
+            if (mapping[ch] !== undefined) {
+                chDisplay = mapping[ch];
+                chStyle['color'] = "red";
+            }
+            if (markedText[i] !== undefined) {
+                chStyle['backgroundColor'] = "gold";
+            }
+            
+
+            
+            decodedText.push((<span key={i} style={chStyle}>{chDisplay}</span>));
+            
+        }
+        
         console.log(counts);
+        const blist = bigramlist.map((e,i) => (<ToggleButton key={i} controller={this} e={e}/>))
+        const tlist = trigramlist.map((e,i) => (<ToggleButton key={i} controller={this} e={e}/>))
     return (
         <div>
         <h1>Frequency Analysis & Substitution Ciphers</h1>
         <div style={{display: "flex"}}>
         <div style={{flex: "0 0 50%"}}>
             <textarea id='par' rows="15" style={{width:"100%"}} onChange={this.updateText.bind(this)} value={ this.state.paragraph }></textarea>
-            <div id='res' style={{fontFamily: "monospace", lineHeight: "1.1"}}>
+            <div id='res' style={{fontFamily: "monospace", lineHeight: "1.1", display: 'flex', flexWrap: 'wrap', fontSize: "150%"}}>
             {decodedText}
+            </div>
+            <div id='kgrams'>
+            {blist}
+            {tlist}
             </div>
         </div>
         <div style={{flex: "0 0 50%"}}>
