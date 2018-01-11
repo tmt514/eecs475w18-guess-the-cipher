@@ -1,12 +1,16 @@
 {
   "assetsByChunkName": {
     "component---src-pages-index-js": [
-      "component---src-pages-index-js-4a16b1f4a2ca48b29944.js",
-      "component---src-pages-index-js-4a16b1f4a2ca48b29944.js.map"
+      "component---src-pages-index-js-63e9107930f8d85a5c4a.js",
+      "component---src-pages-index-js-63e9107930f8d85a5c4a.js.map"
     ],
     "path---": [
       "path----557518bd178906f8d58a.js",
       "path----557518bd178906f8d58a.js.map"
+    ],
+    "path---index-of-coincidence": [
+      "path---index-of-coincidence-a0e39f21c11f6a62c5ab.js",
+      "path---index-of-coincidence-a0e39f21c11f6a62c5ab.js.map"
     ],
     "component---src-layouts-index-js": [
       "component---src-layouts-index-js-1c2d8529e46d8aec66b9.js",
@@ -32,6 +36,10 @@
       "path---404-html-a0e39f21c11f6a62c5ab.js",
       "path---404-html-a0e39f21c11f6a62c5ab.js.map"
     ],
+    "component---src-pages-index-of-coincidence-js": [
+      "component---src-pages-index-of-coincidence-js-f606e32c2424c8f5756d.js",
+      "component---src-pages-index-of-coincidence-js-f606e32c2424c8f5756d.js.map"
+    ],
     "path---frequency-analysis": [
       "path---frequency-analysis-a0e39f21c11f6a62c5ab.js",
       "path---frequency-analysis-a0e39f21c11f6a62c5ab.js.map"
@@ -41,22 +49,22 @@
       "component---src-pages-page-2-js-075954cd9c4544c7dcd8.js.map"
     ],
     "app": [
-      "app-e7cb2960abe3dfc112dc.js",
+      "app-83db9bb9d447166fceff.js",
       "build-js-styles.css",
-      "app-e7cb2960abe3dfc112dc.js.map",
+      "app-83db9bb9d447166fceff.js.map",
       "build-js-styles.css.map"
     ],
     "component---src-pages-caesar-cipher-js": [
-      "component---src-pages-caesar-cipher-js-55b5325e2390865f9927.js",
-      "component---src-pages-caesar-cipher-js-55b5325e2390865f9927.js.map"
+      "component---src-pages-caesar-cipher-js-328823ea149515261b79.js",
+      "component---src-pages-caesar-cipher-js-328823ea149515261b79.js.map"
     ],
     "path---caesar-cipher": [
       "path---caesar-cipher-a0e39f21c11f6a62c5ab.js",
       "path---caesar-cipher-a0e39f21c11f6a62c5ab.js.map"
     ],
     "component---src-pages-frequency-analysis-js": [
-      "component---src-pages-frequency-analysis-js-31a15617ac773af1f48d.js",
-      "component---src-pages-frequency-analysis-js-31a15617ac773af1f48d.js.map"
+      "component---src-pages-frequency-analysis-js-81c3a4b4b00815ab83f6.js",
+      "component---src-pages-frequency-analysis-js-81c3a4b4b00815ab83f6.js.map"
     ],
     "path---404": [
       "path---404-a0e39f21c11f6a62c5ab.js",
