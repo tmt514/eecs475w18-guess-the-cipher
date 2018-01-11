@@ -129,9 +129,18 @@ class CaesarCipher extends Component {
         this.state = {
             mapping: {},
             highlight: {},
-            paragraph: `
-        Meltdown and Spectre exploit critical vulnerabilities in modern processors. These hardware vulnerabilities allow programs to steal data which is currently processed on the computer. While programs are typically not permitted to read data from other programs, a malicious program can exploit Meltdown and Spectre to get hold of secrets stored in the memory of other running programs. This might include your passwords stored in a password manager or browser, your personal photos, emails, instant messages and even business-critical documents.
-        Meltdown and Spectre work on personal computers, mobile devices, and in the cloud. Depending on the cloud provider's infrastructure, it might be possible to steal data from other customers.
+            paragraph: `hzsrnqc klyy wqc flo mflwf ol zqdn nsoznj wskn lj xzsrbjnf,  
+            wzsxz gqv zqhhnf ol ozn glco zlfnco hnlhrn; nsoznj jnrqosdnc 
+            lj fnqj kjsnfbc, wzsxz sc xnjoqsfrv gljn efeceqr. zn rsdnb 
+            qrlfn sf zsc zlecn sf cqdsrrn jlw, wzsoznj flfn hnfnojqonb.  
+            q csfyrn blgncosx cekksxnb ol cnjdn zsg. zn pjnqmkqconb qfb  
+            bsfnb qo ozn xrep, qo zlejc gqozngqosxqrrv ksanb, sf ozn cqgn 
+            jllg, qo ozn cqgn oqprn, fndnj oqmsfy zsc gnqrc wsoz loznj  
+            gngpnjc, gexz rncc pjsfysfy q yenco wsoz zsg; qfb wnfo zlgn 
+            qo naqxorv gsbfsyzo, lfrv ol jnosjn qo lfxn ol pnb. zn fndnj 
+            ecnb ozn xlcv xzqgpnjc wzsxz ozn jnkljg hjldsbnc klj soc 
+            kqdlejnb gngpnjc. zn hqccnb onf zlejc leo lk ozn ownfov-klej 
+            sf cqdsrrn jlw, nsoznj sf crnnhsfy lj gqmsfy zsc olsrno.
         ` };
         
     }
@@ -175,7 +184,8 @@ class CaesarCipher extends Component {
         const mapping = this.state.mapping;
         var counts = {};
         var s = this.state.paragraph.toUpperCase();
-        s = s.replace(/[^A-Z]/g, '');
+        s = s.replace(/[^A-Z ]/g, '');
+        s = s.replace(/ \s*/g, ' ');
         for (var i = 0; i < s.length; i++) {
             var ch = s[i];
             if (counts[ch] === undefined) counts[ch] = 1;
@@ -228,7 +238,7 @@ class CaesarCipher extends Component {
             if (markedText[i] !== undefined) {
                 chStyle['backgroundColor'] = "gold";
             }
-            
+            if (chDisplay === ' ') chDisplay = "\u00a0"
 
             
             decodedText.push((<span key={i} style={chStyle}>{chDisplay}</span>));
@@ -242,7 +252,7 @@ class CaesarCipher extends Component {
         <div>
         <h1>Frequency Analysis & Substitution Ciphers</h1>
         <div style={{display: "flex"}}>
-        <div style={{flex: "0 0 50%"}}>
+        <div style={{flex: "0 0 60%"}}>
             <textarea id='par' rows="15" style={{width:"100%"}} onChange={this.updateText.bind(this)} value={ this.state.paragraph }></textarea>
             <div id='res' style={{fontFamily: "monospace", lineHeight: "1.1", display: 'flex', flexWrap: 'wrap', fontSize: "150%"}}>
             {decodedText}
@@ -252,7 +262,7 @@ class CaesarCipher extends Component {
             {tlist}
             </div>
         </div>
-        <div style={{flex: "0 0 50%"}}>
+        <div style={{flex: "0 0 40%"}}>
         <Histogram counts={counts} controller={this} mapping={mapping}></Histogram>
         </div>
         </div>

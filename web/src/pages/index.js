@@ -4,14 +4,13 @@ import Link from 'gatsby-link'
 const IndexPage = () => (
   <div>
     <h1>Ciphers</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
+    <p>We will be looking on various techniques for decryption classical ciphers.</p>
     <ul>
       <li>
-        <Link to="/caesar-cipher/">Caesar Cipher</Link>
+        <Link to="/frequency-analysis/">Frequency Analysis & Substution Ciphers</Link>
       </li>
       <li>
-        <Link to="/frequency-analysis/">Frequency Analysis</Link>
+        <Link to="/index-of-coincidence/">Index of Coincidence & Vigenère Ciphers</Link>
       </li>
     </ul>
   </div>
