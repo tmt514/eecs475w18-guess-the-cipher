@@ -27,7 +27,7 @@ const Header = () => (
             textDecoration: 'none',
           }}
         >
-          EECS 485 W18 Discussions
+          EECS 475 W18 Discussions
         </Link>
       </h1>
     </div>

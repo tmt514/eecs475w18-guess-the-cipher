@@ -194,11 +194,13 @@ class CaesarCipher extends Component {
         var bigram = {}, bigramlist = [];
         var trigram = {}, trigramlist = [];
         for (var i = 0; i+1 < s.length; i++) {
+            if (s[i]===' ' || s[i+1] === ' ') continue;
             var st = s[i] + s[i+1];
             if (bigram[st] === undefined) bigram[st] = 1;
             else bigram[st] += 1;
         }
         for (var i = 0; i+2 < s.length; i++) {
+            if (s[i]===' ' || s[i+1] === ' ' || s[i+2] === ' ') continue;
             var st = s[i] + s[i+1] + s[i+2];
             if (trigram[st] === undefined) trigram[st] = 1;
             else trigram[st] += 1;
