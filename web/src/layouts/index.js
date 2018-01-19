@@ -54,7 +54,7 @@ const TemplateWrapper = ({ children }) => (
 </script>
 
     <script type="text/x-mathjax-config">{`
-      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}});
       `}
     </script>
     <script type="text/javascript" async
