@@ -46,7 +46,7 @@ class Box extends Component {
         }
 
 
-        if (window.MathJax !== undefined) {
+        if (typeof (window) === 'object' && window.MathJax !== undefined) {
             window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math-" + this.uuid ]);
         }
 
