@@ -755,6 +755,7 @@ class DES extends Component {
             <p>plaintext: <input id='ptxt' style={{fontSize: '150%', fontFamily: 'monospace', width: '300px'}} onChange={this.updateState.bind(this,'plaintext', 'ptxt')} value={this.state.plaintext} /></p>
             <p>key: <input id='ky' style={{fontSize: '150%', fontFamily: 'monospace', width: '300px'}}  onChange={this.updateState.bind(this, 'key', 'ky')} value={this.state.key} /></p>
             {ActualExample}
+            <p>The subkeys represented above correspond to Table 4.2 in the textbook. Each subkey has 48-bits, and it is partitioned into 8 groups above. In each group there are 6 bits represented by 2 hexadecimal digits.</p>
             </div>
             </div>
         )
